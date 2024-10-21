@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home container">
+    <h1 class="my-4">LISTA DE CURSOS</h1>
+    <div class="cursos">
+      <CursoCard v-for="curso in cursos" :curso="curso" :key="curso.id"/>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import CursoCard from '@/components/CursoCard.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
-  }
+    CursoCard,
+  },
+  computed: {
+    ...mapState({
+      cursos: (state)=>state.cursos
+    })
+  },
 }
 </script>
+
+<style scoped>
+  .cursos{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+</style>
