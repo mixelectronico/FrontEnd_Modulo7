@@ -75,6 +75,34 @@ export default new Vuex.Store({
     ]
   },
   getters: {
+    totalAlumnosPermitidos: state =>{
+      return state.cursos.reduce((cantidad, curso)=>{
+        return cantidad + curso.cupos
+      },0)
+    },
+    totalAlumnosInscritos: state =>{
+      return state.cursos.reduce((cantidad, curso)=>{
+        return cantidad + curso.inscritos
+      },0)
+    },
+    totalCursosTerminados: state =>{
+      return state.cursos.reduce((cantidad, curso)=>{
+        if(curso.completado){
+          return cantidad + 1;
+        }else{
+          return cantidad + 0;
+        }
+      },0)
+    },
+    totalCursosActivos: state =>{
+      return state.cursos.reduce((cantidad, curso)=>{
+        if(!curso.completado){
+          return cantidad + 1;
+        }else{
+          return cantidad + 0;
+        }
+      },0)
+    },
   },
   mutations: {
   },
